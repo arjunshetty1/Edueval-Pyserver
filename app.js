@@ -21,7 +21,7 @@ app.use("/", indexRouter);
 app.use("/users", usersRouter);
 
 app.all("*", (req, res) => {
-  res.end("SERVER IS ON");
+  res.end("SERVER 2 IS ON");
 });
 
 module.exports = app;
