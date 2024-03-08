@@ -5,8 +5,8 @@ const path = require("path");
 const bodyParser = require("body-parser");
 
 // Set the maximum request body size to 10MB
-router.use(bodyParser.json({ limit: "50000mb" }));
-router.use(bodyParser.urlencoded({ limit: "50000mb", extended: true }));
+router.use(bodyParser.json({ limit: "100mb" }));
+router.use(bodyParser.urlencoded({ limit: "100mb", extended: true }));
 const UPLOAD_DIR = path.join(__dirname, "uploads"); // Define the upload directory
 
 router.post("/receive-image", (req, res) => {
