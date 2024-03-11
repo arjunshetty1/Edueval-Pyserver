@@ -1,27 +1,28 @@
 var express = require("express");
 var router = express.Router();
-const fs = require("fs");
-const path = require("path");
 const bodyParser = require("body-parser");
 
-// Set the maximum request body size to 10MB
 router.use(bodyParser.json({ limit: "100mb" }));
 router.use(bodyParser.urlencoded({ limit: "100mb", extended: true }));
-const UPLOAD_DIR = path.join(__dirname, "uploads"); // Define the upload directory
 
 router.post("/receive-image", (req, res) => {
   try {
-    console.log(req.body.image);
-    const imageData = Buffer.from(req.body.image); // Extract image data from request body
-    const imageName = req.body.imageName; // Define the image name
-    // const imagePath = path.join(UPLOAD_DIR, imageName); // Construct the full image path
+    const imageData = req.body.image; // Extract image buffer from request body
+    const imageName = req.body.imageName; // Extract image name from request body
+    const question = req.body.question; // Extract question from request body
+    const answerkey = req.body.answerkey; // Extract answer key from request body
 
-    // fs.writeFileSync(imagePath, imageData); // Save the received image to the uploads directory
-    console.log("Image received and saved successfully");
-    res.send("Image received and saved");
+    // Log the received data
+    console.log("Image:", imageName);
+    console.log("Question:", question);
+    console.log("Answer Key:", answerkey);
+    console.log("Image Buffer:", imageData);
+
+    console.log("Data received and logged successfully");
+    res.send("Data received and logged");
   } catch (error) {
-    console.error("Error receiving image:", error.message);
-    res.status(500).send("Error receiving image");
+    console.error("Error receiving data:", error.message);
+    res.status(500).send("Error receiving data");
   }
 });
 
