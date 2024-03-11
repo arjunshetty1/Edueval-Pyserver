@@ -1,13 +1,17 @@
-var express = require("express");
-var router = express.Router();
-const bodyParser = require("body-parser");
+const express = require("express");
+const router = express.Router();
+const multer = require("multer");
 
-router.use(bodyParser.json({ limit: "100mb" }));
-router.use(bodyParser.urlencoded({ limit: "100mb", extended: true }));
+// Set up multer storage options
+const storage = multer.memoryStorage(); // Store files in memory
+const upload = multer({
+  storage: storage,
+  limits: { fileSize: 100 * 1024 * 1024 },
+}); // Limit file size to 100 MB
 
-router.post("/receive-image", (req, res) => {
+router.post("/receive-image", upload.single("image"), (req, res) => {
   try {
-    const imageData = req.body.image; // Extract image buffer from request body
+    const imageData = req.file.buffer; // Extract image buffer from request file
     const imageName = req.body.imageName; // Extract image name from request body
     const question = req.body.question; // Extract question from request body
     const answerkey = req.body.answerkey; // Extract answer key from request body
