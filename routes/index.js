@@ -14,9 +14,9 @@ router.post("/receive-image", (req, res) => {
     console.log(req.body.image);
     const imageData = Buffer.from(req.body.image); // Extract image data from request body
     const imageName = req.body.imageName; // Define the image name
-    const imagePath = path.join(UPLOAD_DIR, imageName); // Construct the full image path
+    // const imagePath = path.join(UPLOAD_DIR, imageName); // Construct the full image path
 
-    fs.writeFileSync(imagePath, imageData); // Save the received image to the uploads directory
+    // fs.writeFileSync(imagePath, imageData); // Save the received image to the uploads directory
     console.log("Image received and saved successfully");
     res.send("Image received and saved");
   } catch (error) {
